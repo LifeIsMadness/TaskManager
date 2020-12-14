@@ -1,2 +1,2 @@
-# WheatherApp
-Android app using OpenWheatherAPI
+# WeatherApp
+Android app using OpenWeatherAPI
