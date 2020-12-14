@@ -2,6 +2,7 @@ package com.example.weatherapp
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.DebugUtils
 import android.view.View
 import android.widget.ProgressBar
@@ -16,6 +17,7 @@ import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.prefs.Preferences
+import kotlin.concurrent.thread
 
 class WeatherActivity : AppCompatActivity() {
 
@@ -78,24 +80,13 @@ class WeatherActivity : AppCompatActivity() {
                 println(response);
             }
             catch (e: Exception){
-                if(e is UnknownHostException){
-                    runOnUiThread {
-                        Toast.makeText(
-                            applicationContext,
-                            "Check your network connection. Retrieving previous data...",
-                            Toast.LENGTH_SHORT).show()
-                    }
-
+                runOnUiThread {
+                    Toast.makeText(
+                        applicationContext,
+                        "Nothing Found! Retrieving previous data...",
+                        Toast.LENGTH_SHORT).show()
                 }
-                else {
-                    runOnUiThread {
-                        Toast.makeText(
-                            applicationContext,
-                            "Nothing Found! Retrieving previous data...",
-                            Toast.LENGTH_SHORT).show()
-                    }
 
-                }
                 response = null
             }
             return response ?: prevResponse
@@ -118,10 +109,10 @@ class WeatherActivity : AppCompatActivity() {
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
                 findViewById<TextView>(R.id.errorText).visibility = View.VISIBLE
 
-    /*            Toast.makeText(
+                Toast.makeText(
                     applicationContext,
                     "No saved responses. Try to search a new city.",
-                    Toast.LENGTH_SHORT).show()*/
+                    Toast.LENGTH_SHORT).show()
             }
         }
 
