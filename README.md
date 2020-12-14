@@ -1,2 +1,2 @@
-# TaskManager
-Android app for managing tasks.
+# WheatherApp
+Android app using OpenWheatherAPI
